@@ -1,0 +1,13 @@
+{
+  "major": 1,
+  "minor": 2,
+  "patch": 0,
+  "resourceReplacements": [
+    {
+      "prefixBefore": "bla",
+      "identifierBefore": "numOfEmployees",
+      "prefixNow": "bla",
+      "identifierNow": "numberOfEmployees"
+    }
+  ]
+}

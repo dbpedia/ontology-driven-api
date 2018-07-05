@@ -1,0 +1,19 @@
+{
+  "major": 1,
+  "minor": 1,
+  "patch": 0,
+  "resourceReplacements": [
+    {
+      "prefixBefore": "dbp",
+      "identifierBefore": "numOfEmployees",
+      "prefixNow": "dbp",
+      "identifierNow": "numberOfEmployees"
+    },
+    {
+      "prefixBefore": "dbp",
+      "identifierBefore": "some-property-that-does-not-work-anymore",
+      "prefixNow": "foaf",
+      "identifierNow": "surname"
+    }
+  ]
+}

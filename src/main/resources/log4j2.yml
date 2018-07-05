@@ -1,0 +1,38 @@
+Configutation:
+  name: Default
+
+  Properties:
+
+    Property:
+      name: log-path
+      value: "logs"
+
+  Appenders:
+
+    Console:
+      name: Console_Appender
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+
+    RollingFile:
+          - name: RollingFile_Appender
+            fileName: ${log-path}/logfile.log
+            filePattern: "logs/archive/rollingfile.log.%d{yyyy-MM-dd}.gz"
+            PatternLayout:
+              pattern: "[%-5level]\t%d{yyyy-MM-dd HH:mm:ss}\t%msg%n"
+            Policies:
+               TimeBasedTriggeringPolicy:
+                  interval: 1
+
+  Loggers:
+      Root:
+        level: all
+        AppenderRef:
+          - ref: Console_Appender
+
+      Logger:
+        name: QueryLogger
+        AppenderRef:
+          - ref: RollingFile_Appender
+            level: all

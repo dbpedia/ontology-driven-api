@@ -4,6 +4,7 @@ package dbpedia.api.factory;
 import dbpedia.api.model.Filter;
 import dbpedia.api.model.RequestModel;
 import dbpedia.api.model.RequestModel.Style;
+import dbpedia.api.model.ResourceModel;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.jena.datatypes.RDFDatatype;
@@ -100,9 +101,9 @@ public abstract class DBpediaQueryFactory<T extends RequestModel> {
     return this.prefixMap;
   }
 
-  /**
-   * Returns the RDF-triple for a specific filter, and adds the returnvalues if needed
-   */
+  protected String getUnprefixedString (ResourceModel model){
+    return "<"+prefixMap.getNsPrefixURI(model.getPrefix())+model.getIdentifier()+">";
+  }
 
 
 }

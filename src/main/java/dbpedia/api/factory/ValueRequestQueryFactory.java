@@ -55,7 +55,7 @@ public class ValueRequestQueryFactory extends DBpediaQueryFactory<ValueRequestMo
         String propname = prop.getPrefix()+prop.getIdentifier();
 
         tripleString
-            .append("OPTIONAL {\n ?entities " + prop.toString() + " ?" + propname + ".\n");
+            .append("OPTIONAL {\n ?entities " + getUnprefixedString(prop) + " ?" + propname + ".\n");
         if (model.getStyle() == Style.NESTED) {
           tripleString.append("OPTIONAL {?" + propname + " rdfs:label ?" + propname + "Label.\n"
               + "FILTER (LANG(?" + propname + "Label)=\"en\")}");
@@ -78,7 +78,7 @@ public class ValueRequestQueryFactory extends DBpediaQueryFactory<ValueRequestMo
     }
 
     for (String entity : model.getEntities()) {
-      valuesString.append(" dbr:" + entity);
+      valuesString.append(" <http://dbpedia.org/resource/" + entity+">");
       sparqlString.setNsPrefix("dbr", prefixMap.getNsPrefixURI("dbr"));
       //model.
     }

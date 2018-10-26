@@ -93,7 +93,7 @@ public class EntityRequestQueryFactory extends DBpediaQueryFactory<EntityRequest
     boolean reqOptionalLabel = false;
 
     if (model.getClassName() != null) {
-      reqString.append(" ?entities rdf:type dbo:" + model.getClassName() + ".\n");
+      reqString.append(" ?entities rdf:type <http://dbpedia.org/ontology/" + model.getClassName() + ">.\n");
     }
 
     for (Filter filter : filterList) {
@@ -171,21 +171,21 @@ public class EntityRequestQueryFactory extends DBpediaQueryFactory<EntityRequest
    * @param returnvalues
    * @return
    */
-  public static String getTripleString(Filter filter, ArrayList<String> returnvalues) {
+  public String getTripleString(Filter filter, ArrayList<String> returnvalues) {
     String result;
 
     if (filter.getFilterProp() == null) {
-      result = "?entities ?properties dbr:" + filter.getFilterVal() + ".\n";
+      result = "?entities ?properties <http://dbpedia.org/resource/" + filter.getFilterVal() + ">.\n";
       returnvalues.add("properties");
 
     } else {
       if (filter.getFilterOp() == null && filter.getFilterVal() != null) {
-        result = "\n?entities " + filter.getFilterProp().toString() + " dbr:" + filter
+        result = "\n?entities " + filter.getFilterProp().toString() + " <http://dbpedia.org/resource/" + filter
             .getFilterVal()
-            + ".";
+            + ">.";
       } else {
         String propname = filter.getFilterProp().getPrefix() + filter.getFilterProp().getIdentifier();
-        result = "?entities " + filter.getFilterProp().toString() + " ?" + propname + ".";
+        result = "?entities " + getUnprefixedString(filter.getFilterProp()) + " ?" + propname + ".";
         returnvalues.add(propname);
 
       }
